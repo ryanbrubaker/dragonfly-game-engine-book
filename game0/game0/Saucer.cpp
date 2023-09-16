@@ -7,16 +7,11 @@
 
 Saucer::Saucer()
 {
-	setSprite("saucer");
-	setType("Sacuer");
-	setVelocity(df::Vector(-0.25, 0));
+	this->setSprite("saucer");
+	this->setType("Sacuer");
+	this->setVelocity(df::Vector(-0.25, 0));
 
 	this->moveToStart();
-	
-	/*int worldHoriz = (int)WM.getBoundary().getHorizontal();
-	int worldVert = (int)WM.getBoundary().getVertical();
-	df::Vector p(worldHoriz / 2, worldVert / 2);
-	setPosition(p);*/
 }
 
 
@@ -24,7 +19,7 @@ int Saucer::eventHandler(const df::Event* e)
 {
 	if (e->getType() == df::OUT_EVENT)
 	{
-		out();
+		this->out();
 		return 1;
 	}
 

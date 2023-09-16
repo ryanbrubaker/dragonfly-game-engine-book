@@ -4,6 +4,7 @@
 
 // Engine includes.
 #include "GameManager.h"
+#include "Hero.h"
 #include "LogManager.h"
 #include "ResourceManager.h"
 #include "Saucer.h"
@@ -42,10 +43,12 @@ int main(int argc, char* argv[])
 void loadResources()
 {
     RM.loadSprite("sprites/saucer-spr.txt", "saucer");
+    RM.loadSprite("sprites/ship-spr.txt", "ship");
 }
 
 
 void populateWorld()
 {
     new Saucer();
+    new Hero();
 }
