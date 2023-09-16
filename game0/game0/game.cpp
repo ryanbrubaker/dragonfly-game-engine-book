@@ -5,24 +5,47 @@
 // Engine includes.
 #include "GameManager.h"
 #include "LogManager.h"
+#include "ResourceManager.h"
+#include "Saucer.h"
+
+
+void loadResources();
+void populateWorld();
+
 
 int main(int argc, char* argv[]) 
 {
 
     // Start up game manager.
-    df::GameManager& game_manager = df::GameManager::getInstance();
-    if (game_manager.startUp()) 
+    df::GameManager& gameManager = df::GameManager::getInstance();
+    if (gameManager.startUp()) 
     {
         df::LogManager& log_manager = df::LogManager::getInstance();
         log_manager.setFlush(true);
         log_manager.writeLog("Error starting game manager!");
-        game_manager.shutDown();
+        gameManager.shutDown();
         return 0;
     }
 
-    // Show splash screen.
     df::splash();
 
+    loadResources();
+    populateWorld();
+    gameManager.run();
+
     // Shut everything down.
-    game_manager.shutDown();
+    gameManager.shutDown();
+}
+
+
+
+void loadResources()
+{
+    RM.loadSprite("sprites/saucer-spr.txt", "saucer");
+}
+
+
+void populateWorld()
+{
+    new Saucer();
 }
