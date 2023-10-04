@@ -1,6 +1,7 @@
 #include "Saucer.h"
 #include "EventOut.h"
 #include "Explosion.h"
+#include "GameManager.h"
 #include "LogManager.h"
 #include "ResourceManager.h"
 #include "WorldManager.h"
@@ -17,6 +18,11 @@ Saucer::Saucer()
 
 
 	this->moveToStart();
+}
+
+Saucer::~Saucer()
+{
+	GM.setGameOver();
 }
 
 
@@ -80,5 +86,11 @@ void Saucer::hit(const df::EventCollision* e)
 		explosion->setPosition(this->getPosition());
 
 		new Saucer;
+	}
+
+	if (e->getObject1()->getType() == "Hero" || e->getObject2()->getType() == "Hero")
+	{
+		WM.markForDelete(e->getObject1());
+		WM.markForDelete(e->getObject2());
 	}
 }
