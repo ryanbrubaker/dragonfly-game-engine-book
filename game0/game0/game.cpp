@@ -44,11 +44,16 @@ void loadResources()
     RM.loadSprite("sprites/saucer-spr.txt", "saucer");
     RM.loadSprite("sprites/ship-spr.txt", "ship");
     RM.loadSprite("sprites/bullet-spr.txt", "bullet");
+    RM.loadSprite("sprites/explosion-spr.txt", "explosion");
 }
 
 
 void populateWorld()
 {
-    new Saucer();
+    for (int i = 0; i < 16; i++)
+    {
+        new Saucer;
+    }
+
     new Hero();
 }
