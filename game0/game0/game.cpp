@@ -16,7 +16,6 @@ void populateWorld();
 
 int main(int argc, char* argv[]) 
 {
-
     // Start up game manager.
     df::GameManager& gameManager = df::GameManager::getInstance();
     if (gameManager.startUp()) 
@@ -44,6 +43,7 @@ void loadResources()
 {
     RM.loadSprite("sprites/saucer-spr.txt", "saucer");
     RM.loadSprite("sprites/ship-spr.txt", "ship");
+    RM.loadSprite("sprites/bullet-spr.txt", "bullet");
 }
 
 

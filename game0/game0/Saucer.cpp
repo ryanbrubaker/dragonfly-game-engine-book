@@ -1,4 +1,5 @@
 #include "Saucer.h"
+#include "EventOut.h"
 #include "LogManager.h"
 #include "ResourceManager.h"
 #include "WorldManager.h"
@@ -8,7 +9,7 @@
 Saucer::Saucer()
 {
 	this->setSprite("saucer");
-	this->setType("Sacuer");
+	this->setType("Saucer");
 	this->setVelocity(df::Vector(-0.25, 0));
 
 	this->moveToStart();
