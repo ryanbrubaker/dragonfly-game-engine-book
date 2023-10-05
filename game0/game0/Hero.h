@@ -8,6 +8,7 @@ class Hero : public df::Object
 {
 public:
 	Hero();
+	~Hero();
 	int eventHandler(const df::Event* e) override;
 
 private:
@@ -18,6 +19,9 @@ private:
 	int fireSlowdown;
 	int fireCountdown;
 
+	int nukeCount;
+
+
 	Reticle* reticle;
 
 	void kdb(const df::EventKeyboard* e);
@@ -25,4 +29,5 @@ private:
 	void fire(df::Vector target);
 	void mouse(const df::EventMouse* e);
 	void step();
+	void nuke();
 };

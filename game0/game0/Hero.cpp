@@ -1,7 +1,10 @@
 #include "Hero.h"
 #include "Bullet.h"
+#include "EventNuke.h"
 #include "EventStep.h"
+#include "Explosion.h"
 #include "GameManager.h"
+#include "Saucer.h"
 #include "WorldManager.h"
 
 Hero::Hero()
@@ -21,8 +24,15 @@ Hero::Hero()
 	this->fireSlowdown = 15;
 	this->fireCountdown = this->fireSlowdown;
 
+	this->nukeCount = 1;
+
 	this->reticle = new Reticle();
 	this->reticle->draw();
+}
+
+Hero::~Hero()
+{
+	GM.setGameOver();
 }
 
 
@@ -80,6 +90,14 @@ void Hero::kdb(const df::EventKeyboard* e)
 			}
 			break;
 		}
+
+		case df::Keyboard::SPACE:
+		{
+			if (e->getKeyboardAction() == df::KEY_PRESSED)
+			{
+				this->nuke();
+			}
+		}
 	}
 }
 
@@ -136,4 +154,17 @@ void Hero::mouse(const df::EventMouse* e)
 	{
 		this->fire(e->getMousePosition());
 	}
+}
+
+
+void Hero::nuke()
+{
+	if (nukeCount <= 0)
+	{
+		return;
+	}
+	nukeCount -= 1;
+
+	EventNuke nuke;
+	WM.onEvent(&nuke);
 }

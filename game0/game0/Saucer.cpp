@@ -1,4 +1,5 @@
 #include "Saucer.h"
+#include "EventNuke.h"
 #include "EventOut.h"
 #include "Explosion.h"
 #include "GameManager.h"
@@ -15,14 +16,9 @@ Saucer::Saucer()
 
 	this->registerInterest(df::OUT_EVENT);
 	this->registerInterest(df::COLLISION_EVENT);
-
+	this->registerInterest(NUKE_EVENT);
 
 	this->moveToStart();
-}
-
-Saucer::~Saucer()
-{
-	GM.setGameOver();
 }
 
 
@@ -39,6 +35,16 @@ int Saucer::eventHandler(const df::Event* e)
 		hit(collisionE);
 		return 1;
 	}
+	else if (e->getType() == NUKE_EVENT)
+	{
+		Explosion* explosion = new Explosion();
+		explosion->setPosition(this->getPosition());
+
+		WM.markForDelete(this);
+
+		new Saucer;
+	}
+
 	return 0;
 }
 
