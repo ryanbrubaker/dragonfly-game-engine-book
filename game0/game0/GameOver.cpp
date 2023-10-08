@@ -1,6 +1,9 @@
 #include "GameOver.h"
 #include "EventStep.h"
 #include "GameManager.h"
+#include "GameStart.h"
+#include "ResourceManager.h"
+#include "Sound.h"
 #include "WorldManager.h"
 
 GameOver::GameOver()
@@ -19,6 +22,12 @@ GameOver::GameOver()
 
 	this->setLocation(df::CENTER_CENTER);
 	this->registerInterest(df::STEP_EVENT);
+
+	df::Sound* pSound = RM.getSound("gameover");
+	if (pSound)
+	{
+		pSound->play();
+	}
 }
 
 
@@ -36,6 +45,7 @@ GameOver ::~GameOver()
 		else if (p->getType() == "GameStart")
 		{
 			p->setActive(true);
+			dynamic_cast<GameStart*>(p)->playMusic();
 		}
 	}
 }

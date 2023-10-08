@@ -107,4 +107,10 @@ void Saucer::hit(const df::EventCollision* e)
 		WM.markForDelete(e->getObject1());
 		WM.markForDelete(e->getObject2());
 	}
+
+	df::Sound* pSound = RM.getSound("explode");
+	if (pSound)
+	{
+		pSound->play();
+	}
 }

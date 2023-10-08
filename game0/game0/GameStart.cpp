@@ -3,6 +3,7 @@
 #include "GameManager.h"
 #include "Hero.h"
 #include "Points.h"
+#include "ResourceManager.h"
 #include "Saucer.h"
 
 GameStart::GameStart()
@@ -11,6 +12,9 @@ GameStart::GameStart()
 	this->setSprite("gamestart");
 	
 	this->registerInterest(df::KEYBOARD_EVENT);
+
+	this->pMusic = RM.getMusic("startmusic");
+	this->playMusic();
 }
 
 
@@ -67,5 +71,11 @@ void GameStart::start()
 	nukesView->setValue(1);
 	nukesView->setColor(df::YELLOW);
 
-	setActive(false);
+	this->setActive(false);
+	this->pMusic->pause();
+}
+
+void GameStart::playMusic()
+{
+	pMusic->play();
 }

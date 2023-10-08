@@ -7,7 +7,9 @@
 #include "GameManager.h"
 #include "GameOver.h"
 #include "Particle.h"
+#include "ResourceManager.h"
 #include "Saucer.h"
+#include "Sound.h"
 #include "utility.h"
 #include "WorldManager.h"
 
@@ -139,6 +141,12 @@ void Hero::fire(df::Vector target)
 	v.scale(1);
 	Bullet* b = new Bullet(this->getPosition());
 	b->setVelocity(v);
+
+	df::Sound* pSound = RM.getSound("fire");
+	if (pSound)
+	{
+		pSound->play();
+	}
 }
 
 
@@ -182,4 +190,9 @@ void Hero::nuke()
 	df::EventView nukeCount("Nukes", -1, true);
 	WM.onEvent(&nukeCount);
 
+	df::Sound* pSound = RM.getSound("nuke");
+	if (pSound)
+	{
+		pSound->play();
+	}
 }
