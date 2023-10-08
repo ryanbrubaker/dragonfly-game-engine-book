@@ -7,6 +7,7 @@ class Saucer : public df::Object
 
 public:  
 	Saucer();
+	~Saucer();
 
 	int eventHandler(const df::Event* e) override;
 	void moveToStart();

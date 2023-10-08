@@ -4,10 +4,11 @@
 
 // Engine includes.
 #include "GameManager.h"
+#include "GameStart.h"
 #include "Hero.h"
 #include "LogManager.h"
 #include "ResourceManager.h"
-#include "Saucer.h"
+#include "Star.h"
 
 
 void loadResources();
@@ -31,6 +32,7 @@ int main(int argc, char* argv[])
 
     loadResources();
     populateWorld();
+
     gameManager.run();
 
     // Shut everything down.
@@ -45,6 +47,8 @@ void loadResources()
     RM.loadSprite("sprites/ship-spr.txt", "ship");
     RM.loadSprite("sprites/bullet-spr.txt", "bullet");
     RM.loadSprite("sprites/explosion-spr.txt", "explosion");
+    RM.loadSprite("sprites/gameover-spr.txt", "gameover");
+    RM.loadSprite("sprites/gamestart-spr.txt", "gamestart");
 }
 
 
@@ -52,8 +56,8 @@ void populateWorld()
 {
     for (int i = 0; i < 16; i++)
     {
-        new Saucer;
+        new Star;
     }
 
-    new Hero();
+    new GameStart();
 }

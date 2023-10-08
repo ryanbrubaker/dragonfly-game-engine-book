@@ -2,9 +2,13 @@
 #include "Bullet.h"
 #include "EventNuke.h"
 #include "EventStep.h"
+#include "EventView.h"
 #include "Explosion.h"
 #include "GameManager.h"
+#include "GameOver.h"
+#include "Particle.h"
 #include "Saucer.h"
+#include "utility.h"
 #include "WorldManager.h"
 
 Hero::Hero()
@@ -32,7 +36,13 @@ Hero::Hero()
 
 Hero::~Hero()
 {
-	GM.setGameOver();
+	new GameOver;
+	WM.markForDelete(this->reticle);
+
+	df::addParticles(df::SPARKS, getPosition(), 2, df::BLUE);
+	df::addParticles(df::SPARKS, getPosition(), 2, df::YELLOW);
+	df::addParticles(df::SPARKS, getPosition(), 3, df::RED);
+	df::addParticles(df::SPARKS, getPosition(), 3, df::RED);
 }
 
 
@@ -86,7 +96,7 @@ void Hero::kdb(const df::EventKeyboard* e)
 		{
 			if (e->getKeyboardAction() == df::KEY_PRESSED)
 			{
-				GM.setGameOver();
+				WM.markForDelete(this);
 			}
 			break;
 		}
@@ -97,6 +107,7 @@ void Hero::kdb(const df::EventKeyboard* e)
 			{
 				this->nuke();
 			}
+			break;
 		}
 	}
 }
@@ -167,4 +178,8 @@ void Hero::nuke()
 
 	EventNuke nuke;
 	WM.onEvent(&nuke);
+
+	df::EventView nukeCount("Nukes", -1, true);
+	WM.onEvent(&nukeCount);
+
 }

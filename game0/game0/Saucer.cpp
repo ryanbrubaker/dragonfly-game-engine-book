@@ -1,6 +1,7 @@
 #include "Saucer.h"
 #include "EventNuke.h"
 #include "EventOut.h"
+#include "EventView.h"
 #include "Explosion.h"
 #include "GameManager.h"
 #include "LogManager.h"
@@ -19,6 +20,13 @@ Saucer::Saucer()
 	this->registerInterest(NUKE_EVENT);
 
 	this->moveToStart();
+}
+
+
+Saucer::~Saucer()
+{
+	df::EventView ev("Points", 10, true);
+	WM.onEvent(&ev);
 }
 
 
